@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>در حال به‌روزرسانی | پیرامید</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  .mnt-wrap{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:30px 20px; text-align:center;
+  }
+  .mnt-inner{ max-width:520px; }
+  .mnt-icon{
+    font-size:5em; margin-bottom:16px;
+    animation:mntSpin 4s linear infinite;
+    display:inline-block;
+  }
+  @keyframes mntSpin{
+    0%,100%{ transform:rotate(0deg); }
+    25%{ transform:rotate(-20deg); }
+    75%{ transform:rotate(20deg); }
+  }
+  .mnt-title{ font-size:1.6em; font-weight:900; margin-bottom:12px; }
+  .mnt-text{
+    color:var(--muted); font-size:1em; line-height:2; margin-bottom:26px;
+    max-width:440px; margin-inline:auto;
+  }
+  .mnt-dots{
+    display:flex; justify-content:center; gap:6px; margin-bottom:22px;
+  }
+  .mnt-dots span{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--primary);
+    animation:mntBounce 1.4s ease-in-out infinite;
+  }
+  .mnt-dots span:nth-child(2){ animation-delay:.2s; }
+  .mnt-dots span:nth-child(3){ animation-delay:.4s; }
+  @keyframes mntBounce{
+    0%,60%,100%{ transform:translateY(0); opacity:.4; }
+    30%{ transform:translateY(-8px); opacity:1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1" aria-hidden="true"></div>
+<div class="blob blob-2" aria-hidden="true"></div>
+
+<div class="mnt-wrap">
+  <div class="mnt-inner">
+    <div class="mnt-icon">🛠️</div>
+    <h1 class="mnt-title" id="mntTitle">در حال به‌روزرسانی</h1>
+    <p class="mnt-text" id="mntText">
+      پیرامید در حال به‌روزرسانیه تا بهتر از همیشه بشه.
+      چند دقیقه‌ی دیگه برگرد 💜
+    </p>
+    <div class="mnt-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <a href="auth.html" class="btn btn-solid" id="mntAdminBtn" style="display:none;">
+      🔐 ورود مدیر
+    </a>
+  </div>
+</div>
+
+<script>
+// خوندن پیام از تنظیمات
+try{
+  const cfg = JSON.parse(localStorage.getItem('piramid_site_config') || '{}');
+  if(cfg.maintenanceMsg){
+    document.getElementById('mntText').textContent = cfg.maintenanceMsg;
+  }
+  // اگه مالک لاگین کرد، دکمه‌ی ورود نشون بده
+  const session = JSON.parse(localStorage.getItem('piramid_session_remember') || 'null')
+    || JSON.parse(sessionStorage.getItem('piramid_session') || 'null');
+  if(session){
+    const users = JSON.parse(localStorage.getItem('piramid_users') || '[]');
+    const u = users.find(x => x.uid === session.uid);
+    if(u && u.role === 'owner'){
+      document.getElementById('mntAdminBtn').style.display = 'inline-flex';
+    }
+  }
+}catch(e){}
+</script>
+
+</body>
+</html>

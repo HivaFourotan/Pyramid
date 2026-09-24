@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حریف مجازی | پیرامید</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="blob blob-1" aria-hidden="true"></div>
+<div class="blob blob-2" aria-hidden="true"></div>
+<div class="blob blob-3" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L44 40 H4 Z" fill="currentColor" opacity=".85"/><path d="M24 4 L34 22 L14 22 Z" fill="currentColor"/></svg>
+    </a>
+    <h2 style="flex:1;text-align:center;font-size:1.05em;">👥 حریف مجازی</h2>
+    <div class="header-actions">
+      <button class="quick-theme-toggle" id="quickThemeToggle" type="button" aria-label="تم">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a href="dashboard.html" class="btn btn-solid" style="padding:9px 20px;font-size:.85em;">🎯 داشبورد</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ============ انتخاب شخصیت ============ -->
+  <section class="rv-pick" id="rvPick">
+    <div class="rv-pick-inner">
+      <span class="rv-eyebrow">شخصیت حریفت رو انتخاب کن</span>
+      <h1>👥 کی رو می‌خوای کنارت داشته باشی؟</h1>
+      <p>هر شخصیت رفتار، لحن و سطح سختی متفاوتی داره. بعداً هم می‌تونی عوضش کنی.</p>
+
+      <div class="rv-pick-grid">
+        <button class="rv-pick-card" data-persona="strict" type="button">
+          <div class="rv-pick-avatar" style="background:linear-gradient(135deg,#c83f7f,#4c1d95);">🔥</div>
+          <h3>آرش — سختگیر</h3>
+          <p>روزی ۸ ساعت می‌خونه. اگه تنبلی کنی بهت می‌تازه. بدون رحم!</p>
+          <span class="rv-pick-tag">سطح: سخت</span>
+        </button>
+
+        <button class="rv-pick-card" data-persona="friendly" type="button">
+          <div class="rv-pick-avatar" style="background:linear-gradient(135deg,#3bb89a,#4a90d9);">🌸</div>
+          <h3>نیلوفر — دوستانه</h3>
+          <p>همیشه تشویقت می‌کنه. کنارت می‌خونه و انرژی مثبت می‌ده.</p>
+          <span class="rv-pick-tag">سطح: راحت</span>
+        </button>
+
+        <button class="rv-pick-card" data-persona="rival" type="button">
+          <div class="rv-pick-avatar" style="background:linear-gradient(135deg,#e8874a,#df6680);">⚔️</div>
+          <h3>سام — رقیب</h3>
+          <p>هدفش اینه که ازت جلو بزنه. رقابت شدید و هیجان‌انگیز.</p>
+          <span class="rv-pick-tag">سطح: متوسط</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ صفحه‌ی اصلی حریف ============ -->
+  <section class="rv-main" id="rvMain" style="display:none;">
+    <div class="rv-wrap">
+
+      <!-- کارت حریف -->
+      <div class="rv-hero glass reveal">
+        <div class="rv-hero-glow"></div>
+
+        <div class="rv-avatar-wrap">
+          <div class="rv-avatar-ring">
+            <div class="rv-avatar" id="rvAvatar">🌸</div>
+          </div>
+          <div class="rv-status-dot" id="rvStatusDot"></div>
+        </div>
+
+        <div class="rv-info">
+          <div class="rv-name-row">
+            <h2 id="rvName">نیلوفر</h2>
+            <button class="rv-change-persona" id="rvChangePersona" type="button" title="تغییر شخصیت">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></svg>
+            </button>
+          </div>
+          <div class="rv-status" id="rvStatus">🟢 در حال مطالعه</div>
+          <div class="rv-mood-bar">
+            <span class="rv-mood-label">حال و احوال:</span>
+            <div class="rv-mood-track">
+              <div class="rv-mood-fill" id="rvMoodFill"></div>
+            </div>
+            <span class="rv-mood-emoji" id="rvMoodEmoji">😊</span>
+          </div>
+        </div>
+
+        <div class="rv-hero-stats">
+          <div class="rv-stat">
+            <b id="rvLevel">۱</b>
+            <span>سطح</span>
+          </div>
+          <div class="rv-stat">
+            <b id="rvXP">۰</b>
+            <span>XP</span>
+          </div>
+          <div class="rv-stat">
+            <b id="rvStreak">۰</b>
+            <span>روز پیوسته</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- رقابت هفتگی -->
+      <div class="rv-race glass reveal delay-1">
+        <div class="rv-section-head">
+          <h3>📊 رقابت هفتگی</h3>
+          <div class="rv-race-summary" id="rvRaceSummary">—</div>
+        </div>
+
+        <div class="rv-race-bars" id="rvRaceBars"></div>
+
+        <div class="rv-race-legend">
+          <div class="rv-leg-you"><span></span> تو</div>
+          <div class="rv-leg-rival"><span></span> <b id="rvLegName">نیلوفر</b></div>
+        </div>
+      </div>
+
+      <!-- رقابت‌های روز -->
+      <div class="rv-duel-grid">
+
+        <div class="rv-duel glass reveal delay-1">
+          <div class="rv-duel-icon">⚔️</div>
+          <h3>دوئل یک‌ساعته</h3>
+          <p id="rvDuelDesc">هر کی توی یک ساعت بیشتر بخونه، برنده‌ست.</p>
+          <div class="rv-duel-timer" id="rvDuelTimer" style="display:none;">
+            <div class="rv-duel-time" id="rvDuelTime">۶۰:۰۰</div>
+            <div class="rv-duel-progress">
+              <div class="rv-duel-you">
+                <span>تو</span>
+                <div class="rv-duel-bar"><div class="rv-duel-fill" id="rvDuelYouFill"></div></div>
+              </div>
+              <div class="rv-duel-rival">
+                <span id="rvDuelRivalLabel">حریف</span>
+                <div class="rv-duel-bar"><div class="rv-duel-fill rv-fill-rival" id="rvDuelRivalFill"></div></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-solid" id="rvDuelBtn" type="button">شروع دوئل</button>
+        </div>
+
+        <div class="rv-feed glass reveal delay-2">
+          <div class="rv-section-head">
+            <h3>💬 پیام‌های حریف</h3>
+            <button class="rv-clear-btn" id="rvClearFeed" type="button" title="پاک کردن">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></svg>
+            </button>
+          </div>
+          <div class="rv-feed-list" id="rvFeedList"></div>
+        </div>
+
+      </div>
+
+      <!-- آمار کامل -->
+      <div class="rv-compare glass reveal delay-2">
+        <div class="rv-section-head">
+          <h3>📈 مقایسه‌ی کامل</h3>
+        </div>
+        <div class="rv-compare-grid">
+          <div class="rv-compare-col">
+            <div class="rv-compare-head">
+              <span class="rv-dot you"></span>
+              <b>تو</b>
+            </div>
+            <div class="rv-compare-row"><span>سطح</span><b id="cmpYouLevel">۱</b></div>
+            <div class="rv-compare-row"><span>XP</span><b id="cmpYouXP">۰</b></div>
+            <div class="rv-compare-row"><span>دقیقه امروز</span><b id="cmpYouToday">۰</b></div>
+            <div class="rv-compare-row"><span>دقیقه این هفته</span><b id="cmpYouWeek">۰</b></div>
+            <div class="rv-compare-row"><span>روز پیوسته</span><b id="cmpYouStreak">۰</b></div>
+          </div>
+          <div class="rv-compare-col">
+            <div class="rv-compare-head">
+              <span class="rv-dot rival"></span>
+              <b id="rvCompareRivalName">حریف</b>
+            </div>
+            <div class="rv-compare-row"><span>سطح</span><b id="cmpRvLevel">۱</b></div>
+            <div class="rv-compare-row"><span>XP</span><b id="cmpRvXP">۰</b></div>
+            <div class="rv-compare-row"><span>دقیقه امروز</span><b id="cmpRvToday">۰</b></div>
+            <div class="rv-compare-row"><span>دقیقه این هفته</span><b id="cmpRvWeek">۰</b></div>
+            <div class="rv-compare-row"><span>روز پیوسته</span><b id="cmpRvStreak">۰</b></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ مودال پایان دوئل ============ -->
+<div class="rv-duel-result" id="rvDuelResult">
+  <div class="rv-duel-result-card">
+    <div class="rv-result-icon" id="rvResultIcon">🏆</div>
+    <h2 id="rvResultTitle">بردی!</h2>
+    <p id="rvResultText">—</p>
+    <button class="btn btn-solid" id="rvResultBtn" type="button">باشه</button>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="script.js"></script>
+<script src="rival.js"></script>
+</body>
+</html>

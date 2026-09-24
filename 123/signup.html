@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ثبت‌نام | پیرامید</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="blob blob-1" aria-hidden="true"></div>
+<div class="blob blob-2" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L44 40 H4 Z" fill="currentColor" opacity=".85"/><path d="M24 4 L34 22 L14 22 Z" fill="currentColor"/></svg>
+    </a>
+    <h2 style="flex:1;text-align:center;font-size:1.05em;">ثبت‌نام</h2>
+    <a href="index.html" class="btn btn-solid" style="padding:9px 20px;font-size:.85em;">خانه</a>
+  </div>
+</header>
+
+<main>
+  <div class="signup-wrap">
+
+    <div class="signup-card glass" id="signupCard">
+      <div class="signup-head">
+        <div class="signup-icon">👤</div>
+        <h1>ساخت پروفایل</h1>
+        <p>اطلاعاتت رو پر کن تا یه کد اختصاصی بگیری</p>
+      </div>
+
+      <form class="signup-form" id="signupForm">
+        <label>
+          <span>نام نمایشی</span>
+          <input type="text" id="suName" required placeholder="Hiva">
+        </label>
+        <label>
+          <span>نام کاربری (انگلیسی)</span>
+          <input type="text" id="suUser" required pattern="[a-zA-Z0-9_]+" placeholder="hiva_2025">
+        </label>
+        <label>
+          <span>ایمیل (اختیاری)</span>
+          <input type="email" id="suEmail" placeholder="you@example.com">
+        </label>
+        <label>
+          <span>سن (اختیاری)</span>
+          <input type="number" id="suAge" min="8" max="99" placeholder="18">
+        </label>
+        <button type="submit" class="btn btn-solid" style="width:100%;">ساخت پروفایل</button>
+      </form>
+    </div>
+
+    <div class="signup-card glass" id="codeCard" style="display:none;">
+      <div class="signup-head">
+        <div class="signup-icon">🎉</div>
+        <h1>پروفایل ساخته شد</h1>
+        <p>این کد رو کپی کن و برای مالک بفرست</p>
+      </div>
+
+      <div class="code-box">
+        <textarea id="userCode" readonly></textarea>
+        <button class="copy-btn" id="copyCode" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          کپی
+        </button>
+      </div>
+
+      <p class="code-hint">مالک این کد رو توی پنلش پیست می‌کنه تا تو رو ببینه.</p>
+
+      <a href="index.html" class="btn btn-solid" style="width:100%;margin-top:16px;">برو به صفحه‌ی اصلی</a>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="script.js"></script>
+<script src="signup.js"></script>
+</body>
+</html>
