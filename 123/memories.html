@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خاطرات پیرامید | سفر تو</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="blob blob-1" aria-hidden="true"></div>
+<div class="blob blob-2" aria-hidden="true"></div>
+<div class="blob blob-3" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L44 40 H4 Z" fill="currentColor" opacity=".85"/><path d="M24 4 L34 22 L14 22 Z" fill="currentColor"/></svg>
+    </a>
+    <h2 style="flex:1;text-align:center;font-size:1.05em;">🎬 خاطرات پیرامید</h2>
+    <div class="header-actions">
+      <button class="quick-theme-toggle" id="quickThemeToggle" type="button" aria-label="تم">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a href="dashboard.html" class="btn btn-solid" style="padding:9px 20px;font-size:.85em;">🎯 داشبورد</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="mm-wrap">
+
+    <!-- ============ Header بزرگ ============ -->
+    <section class="mm-hero reveal">
+      <div class="mm-hero-cinema"></div>
+      <span class="mm-eyebrow">🎬 سفر تو در یک نگاه</span>
+      <h1 id="mmHeroTitle">سلام دوست من 👋</h1>
+      <p id="mmHeroSubtitle">اینجا همه‌ی لحظه‌های مهم مسیرت ثبت شده.</p>
+
+      <div class="mm-hero-stats" id="mmHeroStats"></div>
+    </section>
+
+    <!-- ============ تب‌ها ============ -->
+    <div class="mm-tabs reveal delay-1">
+      <button class="mm-tab active" data-tab="timeline" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        خط زمان
+      </button>
+      <button class="mm-tab" data-tab="capsule" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4zM12 6V3M8 3h8"/></svg>
+        کپسول زمان
+      </button>
+      <button class="mm-tab" data-tab="future" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+        پیش‌بینی آینده
+      </button>
+    </div>
+
+    <!-- ============ تب ۱: خط زمان ============ -->
+    <section class="mm-panel active" data-panel="timeline">
+      <div class="mm-tl" id="mmTimeline"></div>
+      <div class="mm-empty" id="mmTlEmpty" style="display:none;">
+        <div class="mm-empty-icon">🎬</div>
+        <h3>هنوز خاطره‌ای ثبت نشده</h3>
+        <p>با مطالعه، تخمین، فلش‌کارت و بازی — لحظه‌ها خودکار اینجا ظاهر می‌شن.</p>
+        <a href="dashboard.html" class="btn btn-solid">شروع کن</a>
+      </div>
+    </section>
+
+    <!-- ============ تب ۲: کپسول زمان ============ -->
+    <section class="mm-panel" data-panel="capsule">
+      <div class="mm-capsule-head">
+        <div>
+          <h2>📮 کپسول‌های زمان</h2>
+          <p>به خودت در آینده پیام بفرست. روزی که رسید، با یه انیمیشن زیبا بازش می‌کنی.</p>
+        </div>
+        <button class="btn btn-solid" id="mmNewCapsule" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          کپسول جدید
+        </button>
+      </div>
+
+      <div class="mm-capsules" id="mmCapsules"></div>
+
+      <div class="mm-empty" id="mmCapsuleEmpty" style="display:none;">
+        <div class="mm-empty-icon">📮</div>
+        <h3>هنوز کپسولی نداری</h3>
+        <p>یه پیام به خودت در آینده بنویس. می‌تونی بگی «اگه این رو می‌خونی، یعنی...»</p>
+        <button class="btn btn-solid" id="mmNewCapsule2" type="button">اولین کپسول رو بساز</button>
+      </div>
+    </section>
+
+    <!-- ============ تب ۳: پیش‌بینی ============ -->
+    <section class="mm-panel" data-panel="future">
+      <div class="mm-future">
+        <div class="mm-future-card glass reveal">
+          <h2>🔮 اگه همینطور ادامه بدی...</h2>
+          <p>با تحلیل عملکرد الان تو، این پیش‌بینی رو داریم:</p>
+          <div class="mm-predict-grid" id="mmPredictGrid"></div>
+        </div>
+
+        <div class="mm-future-card glass reveal delay-1">
+          <h3>📊 نمودار رشد ۳۰ روز آینده</h3>
+          <div class="mm-chart" id="mmFutureChart"></div>
+        </div>
+
+        <div class="mm-future-card glass reveal delay-2">
+          <h3>💌 پیام از آینده</h3>
+          <div class="mm-letter" id="mmFutureLetter">
+            <div class="mm-letter-paper">
+              <div class="mm-letter-text" id="mmLetterText"></div>
+              <div class="mm-letter-sign">— خودت، در ۳۰ روز آینده</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ============ مودال ساخت کپسول ============ -->
+<div class="modal-overlay" id="mmCapsuleModal" role="dialog" aria-modal="true">
+  <div class="modal-card glass" style="max-width:520px;">
+    <div class="modal-head">
+      <h3>📮 کپسول زمان جدید</h3>
+      <button class="modal-close" data-close="mmCapsuleModal" aria-label="بستن">✕</button>
+    </div>
+    <div class="class-form" style="padding:20px 24px 26px;">
+      <label>
+        <span>عنوان کپسول</span>
+        <input type="text" id="mmCapTitle" placeholder="مثلا: پیام برای منِ بعد از کنکور" style="padding:12px 16px;border-radius:14px;border:1.5px solid var(--glass-border);background:var(--glass-bg);color:var(--text);font-size:.95em;outline:none;">
+      </label>
+      <label>
+        <span>پیام به آینده</span>
+        <textarea id="mmCapText" rows="5" placeholder="سلام آینده‌ی من، اگه این رو می‌خونی یعنی..." style="padding:12px 16px;border-radius:14px;border:1.5px solid var(--glass-border);background:var(--glass-bg);color:var(--text);font-size:.95em;outline:none;font-family:inherit;resize:vertical;"></textarea>
+      </label>
+      <label>
+        <span>کی باز بشه؟</span>
+        <div class="mm-delay-chips" id="mmDelayChips">
+          <button type="button" class="mm-chip" data-days="7">۱ هفته</button>
+          <button type="button" class="mm-chip" data-days="30">۱ ماه</button>
+          <button type="button" class="mm-chip" data-days="90">۳ ماه</button>
+          <button type="button" class="mm-chip active" data-days="180">۶ ماه</button>
+          <button type="button" class="mm-chip" data-days="365">۱ سال</button>
+        </div>
+      </label>
+      <label>
+        <span>رنگ کپسول</span>
+        <div class="mm-color-chips" id="mmColorChips">
+          <button type="button" class="mm-color active" data-color="pink" style="background:linear-gradient(135deg,#e85d9e,#c78ae8)"></button>
+          <button type="button" class="mm-color" data-color="blue" style="background:linear-gradient(135deg,#4a90d9,#82cdb5)"></button>
+          <button type="button" class="mm-color" data-color="orange" style="background:linear-gradient(135deg,#e8874a,#df6680)"></button>
+          <button type="button" class="mm-color" data-color="green" style="background:linear-gradient(135deg,#3bb89a,#82cdb5)"></button>
+          <button type="button" class="mm-color" data-color="purple" style="background:linear-gradient(135deg,#8b5cf6,#c78ae8)"></button>
+        </div>
+      </label>
+      <button class="btn btn-solid" id="mmSaveCapsule" type="button" style="width:100%;">🔒 مهر و موم کن</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ مودال باز کردن کپسول ============ -->
+<div class="mm-open-capsule" id="mmOpenCapsule">
+  <div class="mm-open-capsule-inner">
+    <div class="mm-gift-box" id="mmGiftBox">🎁</div>
+    <div class="mm-open-card" id="mmOpenCard" style="display:none;">
+      <h3 id="mmOpenTitle">—</h3>
+      <p id="mmOpenText">—</p>
+      <div class="mm-open-meta">
+        <span id="mmOpenDate">—</span>
+      </div>
+      <button class="btn btn-solid" id="mmOpenClose" type="button">بستن</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Cinema Mode ============ -->
+<div class="mm-cinema" id="mmCinema">
+  <button class="mm-cinema-close" id="mmCinemaClose" type="button">✕</button>
+  <div class="mm-cinema-bars top"></div>
+  <div class="mm-cinema-bars bottom"></div>
+  <div class="mm-cinema-content">
+    <div class="mm-cinema-icon" id="mmCinemaIcon">🎬</div>
+    <div class="mm-cinema-title" id="mmCinemaTitle">—</div>
+    <div class="mm-cinema-desc" id="mmCinemaDesc">—</div>
+    <div class="mm-cinema-date" id="mmCinemaDate">—</div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="script.js"></script>
+<script src="memories.js"></script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پیرامید | تخمین دقیق کنکور</title>
+<meta name="description" content="تخمین تراز، رتبه و انتخاب رشته کنکور با پیرامید">
+<meta name="theme-color" content="#e85d9e">
+<!-- OpenGraph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="پیرامید | تخمین دقیق کنکور">
+<meta property="og:description" content="تخمین تراز، رتبه، فلش‌کارت هوشمند و ابزارهای مطالعه برای کنکوری‌ها">
+<meta property="og:image" content="icons/icon.svg">
+<meta property="og:locale" content="fa_IR">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="پیرامید | تخمین دقیق کنکور">
+<meta name="twitter:description" content="تخمین تراز، رتبه، فلش‌کارت هوشمند و ابزارهای مطالعه">
+
+<!-- SEO -->
+<meta name="keywords" content="کنکور, تخمین تراز, تخمین رتبه, انتخاب رشته, فلش کارت, مطالعه">
+<meta name="author" content="پیرامید">
+<meta name="robots" content="index, follow">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">رفتن به محتوای اصلی</a>
+<div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+<div class="blob blob-1" aria-hidden="true"></div>
+<div class="blob blob-2" aria-hidden="true"></div>
+<div class="blob blob-3" aria-hidden="true"></div>
+<canvas id="constellation" aria-hidden="true"></canvas>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============ دکمه‌های شناور ============ -->
+<button id="themeDrawerBtn" class="floating-btn theme-drawer-btn" title="تم" aria-label="تم">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+
+<button class="floating-btn calc-btn" id="calcBtn" title="ماشین‌حساب" aria-label="ماشین‌حساب">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h4"/></svg>
+</button>
+
+<button class="floating-btn class-btn" id="classBtn" title="کلاس آنلاین" aria-label="کلاس آنلاین">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+</button>
+
+<button class="floating-btn back-top" id="backTop" aria-label="برگشت به بالا">
+  <svg class="ring" viewBox="0 0 62 62" aria-hidden="true"><circle class="bg" cx="31" cy="31" r="28"/><circle class="fg" cx="31" cy="31" r="28"/></svg>
+  <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+
+<!-- ============ کشوی تم (سایدبار شیشه‌ای) ============ -->
+<div class="theme-drawer-overlay" id="themeDrawerOverlay" aria-hidden="true"></div>
+<aside class="theme-drawer" id="themeDrawer" aria-hidden="true">
+  <div class="theme-drawer-head">
+    <h3>🎨 پنل تم</h3>
+    <button class="drawer-close" id="themeDrawerClose" aria-label="بستن">✕</button>
+  </div>
+
+  <div class="theme-drawer-body">
+    <section class="drawer-section">
+      <h4>🌗 حالت نمایش</h4>
+      <div class="quick-mode-row">
+        <button class="quick-mode-btn" data-mode="light" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          روشن
+        </button>
+        <button class="quick-mode-btn" data-mode="dark" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          تیره
+        </button>
+        <button class="quick-mode-btn" data-mode="auto" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          خودکار
+        </button>
+      </div>
+    </section>
+
+    <section class="drawer-section">
+      <h4>🎨 رنگ اصلی</h4>
+      <div class="color-grid" id="colorGrid">
+        <button class="color-swatch" data-theme="0"  style="background:#e85d9e" type="button" aria-label="صورتی"></button>
+        <button class="color-swatch" data-theme="1"  style="background:#4a90d9" type="button" aria-label="آبی"></button>
+        <button class="color-swatch" data-theme="2"  style="background:#3bb89a" type="button" aria-label="سبز"></button>
+        <button class="color-swatch" data-theme="3"  style="background:#8b5cf6" type="button" aria-label="بنفش"></button>
+        <button class="color-swatch" data-theme="4"  style="background:#e8874a" type="button" aria-label="نارنجی"></button>
+        <button class="color-swatch" data-theme="5"  style="background:#39ff14" type="button" aria-label="فسفری"></button>
+        <button class="color-swatch" data-theme="6"  style="background:#1e3a8a" type="button" aria-label="آبی نفتی"></button>
+        <button class="color-swatch" data-theme="7"  style="background:#06b6d4" type="button" aria-label="فیروزه‌ای"></button>
+        <button class="color-swatch" data-theme="8"  style="background:#4c1d95" type="button" aria-label="بادمجونی"></button>
+        <button class="color-swatch" data-theme="9"  style="background:#10b981" type="button" aria-label="یشمی"></button>
+        <button class="color-swatch" data-theme="10" style="background:#0c4a6e" type="button" aria-label="آبی تیره"></button>
+        <button class="color-swatch" data-theme="11" style="background:#f59e0b" type="button" aria-label="زرد"></button>
+        <button class="color-swatch" data-theme="12" style="background:#ea580c" type="button" aria-label="پرتغالی"></button>
+        <button class="color-swatch" data-theme="13" style="background:#22c55e" type="button" aria-label="سبز روشن"></button>
+      </div>
+    </section>
+
+    <section class="drawer-section">
+      <h4>✨ افکت‌های بصری</h4>
+      <div class="toggle-row"><span>لکه‌های شناور</span><button class="toggle-switch on" id="blobToggle" type="button"></button></div>
+      <div class="toggle-row"><span>ذرات پس‌زمینه</span><button class="toggle-switch on" id="particleToggle" type="button"></button></div>
+      <div class="toggle-row"><span>🌊 شفق قطبی (Aurora)</span><button class="toggle-switch" id="fxAurora" type="button"></button></div>
+      <div class="toggle-row"><span>💎 درخشش کریستالی</span><button class="toggle-switch" id="fxCrystal" type="button"></button></div>
+      <div class="toggle-row"><span>🌙 ماه و ستاره‌ها</span><button class="toggle-switch" id="moonToggle" type="button"></button></div>
+    </section>
+
+    <section class="drawer-section">
+      <h4>🔤 اندازه فونت</h4>
+      <input type="range" id="fontSlider" class="font-slider" min="12" max="24" step="1" value="15">
+      <span class="font-value" id="fontValue">۱۵ پیکسل</span>
+    </section>
+  </div>
+</aside>
+
+<!-- ============ هدر ============ -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="پیرامید">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L44 40 H4 Z" fill="currentColor" opacity=".85"/><path d="M24 4 L34 22 L14 22 Z" fill="currentColor"/><path d="M24 14 L44 40 H30 L20 22 Z" fill="currentColor" opacity=".6"/></svg>
+    </a>
+
+    <nav aria-label="منوی اصلی">
+      <ul class="main-nav">
+        <li class="has-dropdown">
+          <a href="#" class="nav-link" aria-expanded="false">کنکور
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="dropdown" id="majorsDropdown">
+            <a href="estimate.html?m=tajrobi"><span class="dot"></span>تخمین کنکور تجربی</a>
+            <a href="estimate.html?m=riazi"><span class="dot"></span>تخمین کنکور ریاضی</a>
+            <a href="estimate.html?m=ensani"><span class="dot"></span>تخمین کنکور انسانی</a>
+            <a href="estimate.html?m=honar"><span class="dot"></span>تخمین کنکور هنر</a>
+            <button class="owner-add-major" id="ownerAddMajorBtn" type="button" style="display:none;"><span class="dot plus"></span>+ افزودن رشته (فقط مالک)</button>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <a href="#" class="nav-link" aria-expanded="false">ابزارها
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="dropdown">
+            <a href="estimate.html"><span class="dot"></span>تخمین کنکور</a>
+            <a href="#" id="openCalcNav"><span class="dot"></span>ماشین‌حساب</a>
+            <a href="#" id="openClassNav"><span class="dot"></span>ورود به کلاس آنلاین</a>
+          </div>
+        </li>
+                <li><a href="dashboard.html" class="nav-link">🎯 داشبورد</a></li>
+        <li><a href="#announcements" class="nav-link">📢 اعلانات</a></li>
+  <li><a href="#" class="nav-link" id="openChatNav">پشتیبانی</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <!-- تاگل سریع دارک/لایت -->
+      <button class="quick-theme-toggle" id="quickThemeToggle" aria-label="تغییر سریع تم" title="تغییر سریع روشن/تیره" type="button">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <button class="nav-toggle" type="button" aria-label="منو" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+
+      <!-- دکمه‌ی اکانت -->
+      <div class="account-btn-wrap">
+<a href="account.html" class="account-pill" id="accountPill" aria-label="حساب کاربری">
+  <span class="avatar" id="headerAvatar">؟</span>
+  <span class="acc-meta">
+    <b id="headerName">مهمان</b>
+    <small id="headerRole">وارد نشده</small>
+  </span>
+</a>
+        <button class="owner-badge" id="ownerBadge" type="button" style="display:none;" title="پنل مالک">👑 مالک</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ اعلانات ============ -->
+<div class="announcements-bar" id="announcementsBar" style="display:none;">
+  <div class="container">
+    <span class="ann-icon">📢</span>
+    <div class="ann-track" id="annTrack"></div>
+    <a href="#announcements" class="ann-more">همه</a>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="parallax-layer parallax-dots" data-speed="0.15" aria-hidden="true"></div>
+    <div class="parallax-layer parallax-glow" data-speed="0.35" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9-6.2 3.9-1.6-7L2 9.2l7.1-.6z"/></svg>
+        مورد اعتماد هزاران داوطلب
+      </span>
+      <h1 id="heroTitle">تخمین دقیق کنکور با پیرامید</h1>
+      <p>با استفاده از الگوریتم‌های دقیق و به‌روز، تراز، رتبه و انتخاب رشته‌ی خود را به سرعت تخمین بزنید.</p>
+      <div class="hero-cta">
+        <a href="estimate.html" class="btn btn-primary">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          شروع تخمین
+        </a>
+        <a href="account.html" class="btn btn-outline">پیشخوان من</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">⭐ تخمین تراز دقیق</span><span class="marquee-sep"></span>
+      <span class="marquee-item">⭐ مقایسه با داوطلبان</span><span class="marquee-sep"></span>
+      <span class="marquee-item">⭐ انتخاب رشته هوشمند</span><span class="marquee-sep"></span>
+      <span class="marquee-item">⭐ پشتیبانی ۲۴ ساعته</span><span class="marquee-sep"></span>
+      <span class="marquee-item">⭐ تخمین تراز دقیق</span><span class="marquee-sep"></span>
+      <span class="marquee-item">⭐ مقایسه با داوطلبان</span><span class="marquee-sep"></span>
+    </div>
+  </div>
+
+  <!-- چرا پیرامید -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">چرا پیرامید؟</span>
+        <h2>ابزاری مطمئن برای برنامه‌ریزی تحصیلی</h2>
+        <p>داده‌های به‌روز، فرمول‌های دقیق و رابط کاربری ساده.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card glass reveal delay-1">
+          <div class="why-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12L3 7l9-5 9 5-9 5z"/></svg></div>
+          <h3>بروزرسانی هر سال</h3><p>دوره های ما با آخرین تغییرات کنکور هماهنگ می‌شود.</p>
+        </div>
+        <div class="why-card glass reveal delay-2">
+          <div class="why-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3>نتیجه در چند ثانیه</h3><p>فقط کافی است درصدهای خود را وارد کنید.</p>
+        </div>
+        <div class="why-card glass reveal delay-3">
+          <div class="why-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <h3>دقت اثبات‌شده</h3><p>مقایسه با نتایج واقعی داوطلبان، دقت را بالاتر برده.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- امکانات -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">امکانات</span>
+        <h2>خدمات ما</h2>
+      </div>
+      <div class="services-grid">
+                <a href="dashboard.html" class="service-card glass is-featured reveal">
+          <div class="service-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3>🎯 داشبورد مطالعه</h3><p>تایمر تمرکز، آمار پیشرفت و دستاوردها</p>
+          <span class="service-link link-purple">شروع کن →</span>
+        </a>
+        <a href="account.html" class="service-card glass reveal">
+          <div class="service-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01"/></svg></div>
+          <h3>معدل‌گیری</h3><p>محاسبه‌ی دقیق معدل کل</p>
+          <span class="service-link link-purple">استفاده کنید →</span>
+        </a>
+        <a href="estimate.html" class="service-card glass reveal delay-1">
+          <div class="service-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+          <h3>انتخاب رشته</h3><p>انتخاب رشته متناسب با رتبه</p>
+          <span class="service-link link-orange">استفاده کنید →</span>
+        </a>
+        <a href="estimate.html?m=savabegh" class="service-card glass is-featured reveal delay-2">
+          <div class="service-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+          <h3>تخمین سوابق</h3><p>تخمین تراز بر اساس سوابق</p>
+          <span class="service-link link-green">استفاده کنید →</span>
+        </a>
+        <a href="estimate.html" class="service-card glass reveal delay-3">
+          <div class="service-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/></svg></div>
+          <h3>تخمین کنکور</h3><p>تخمین تراز و رتبه</p>
+          <span class="service-link link-blue">استفاده کنید →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- مراحل -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">روند کار</span><h2>در چهار گام ساده</h2>
+      </div>
+      <div class="steps">
+        <div class="step glass reveal"><div class="step-num">۱</div><h3>ثبت‌نام رایگان</h3><p>در چند ثانیه حساب بسازید</p></div>
+        <div class="step glass reveal delay-1"><div class="step-num">۲</div><h3>وارد کردن درصدها</h3><p>درصد دروس را وارد کنید</p></div>
+        <div class="step glass reveal delay-2"><div class="step-num">۳</div><h3>مشاهده تراز</h3><p>نتیجه را ببینید</p></div>
+        <div class="step glass reveal delay-3"><div class="step-num">۴</div><h3>انتخاب رشته</h3><p>رشته موردنظر را بررسی کنید</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- آمار -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="stats-band glass reveal" id="statsBand">
+        <div class="stat"><div class="counter-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="50"/><circle class="ring-fg" cx="60" cy="60" r="50"/></svg><b class="ring-value" data-count="85000" data-prefix="+">۰</b></div><span>داوطلب ثبت‌نام‌شده</span></div>
+        <div class="stat"><b data-count="97" data-suffix="٪">۰٪</b><span>دقت تخمین تراز</span></div>
+        <div class="stat"><b data-count="20" data-prefix="+">۰</b><span>رشته و گروه آزمایشی</span></div>
+        <div class="stat"><b data-count="5" data-prefix="+">۰</b><span>سال داده کنکور</span></div>
+      </div>
+    </div>
+  </section>
+  <!-- داستان‌ها -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">داستان موفقیت</span><h2>رتبه‌های برتر پیرامید</h2>
+      </div>
+      <div class="stories-wrap" id="storiesWrap">
+        <div class="story" data-name="محمد رضایی" data-rank="رتبه ۴۵۰ تجربی" data-initial="م" data-text="تخمین تراز پیرامید تقریبا با کارنامه‌ی نهایی من یکسان بود.">
+          <div class="story-ring"><div class="story-avatar">م</div></div><div class="story-name">محمد رضایی</div>
+        </div>
+        <div class="story" data-name="زهرا احمدی" data-rank="رتبه ۱۲۰۰ انسانی" data-initial="ز" data-text="گزارش تراز سوابق خیلی شفاف بود.">
+          <div class="story-ring"><div class="story-avatar">ز</div></div><div class="story-name">زهرا احمدی</div>
+        </div>
+        <div class="story" data-name="علی محمدی" data-rank="رتبه ۸۹۰ ریاضی" data-initial="ع" data-text="ماژول انتخاب رشته دقیقا دانشگاه‌های قابل قبول را نشان داد.">
+          <div class="story-ring"><div class="story-avatar">ع</div></div><div class="story-name">علی محمدی</div>
+        </div>
+        <div class="story" data-name="سارا کریمی" data-rank="رتبه ۳۲۰ تجربی" data-initial="س" data-text="تحلیل نقاط ضعف خیلی کمکم کرد.">
+          <div class="story-ring"><div class="story-avatar">س</div></div><div class="story-name">سارا کریمی</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- اعلانات (کامل) -->
+  <section class="section section-soft" id="announcements">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">📢 اعلانات</span><h2>آخرین خبرها</h2>
+      </div>
+      <div class="ann-grid" id="annGrid">
+        <p class="empty-msg" id="annEmpty">هیچ اعلانی هنوز ثبت نشده است.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-band glass reveal">
+        <h2>همین حالا شروع کنید</h2>
+        <p>با ثبت‌نام رایگان، به تمام ابزارها دسترسی پیدا کنید.</p>
+        <div class="cta-actions">
+          <a href="account.html" class="btn btn-primary">ساخت پروفایل</a>
+          <a href="estimate.html" class="btn btn-outline">شروع تخمین</a>
+        </div>
+      </div>
+    </div>
+  </section>
+<button class="floating-btn chat-toggle" id="chatToggle" aria-label="چت" type="button">
+  <span class="chat-badge">۱</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+</main>
+<div class="chat-widget glass" id="chatWidget" role="dialog" aria-label="چت">
+  <div class="chat-header">
+    <span class="avatar">پ</span>
+    <div class="info"><b>پشتیبانی پیرامید</b><small>آنلاین</small></div>
+    <button class="chat-close" id="chatClose" aria-label="بستن" type="button">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">سلام! 👋 چطور می‌تونم کمکت کنم؟</div>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="chatInput" placeholder="پیام..." aria-label="پیام">
+    <button id="chatSend" aria-label="ارسال" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </div>
+</div>
+<!-- ============ مودال ماشین‌حساب ============ -->
+<div class="modal-overlay" id="calcOverlay" role="dialog" aria-modal="true">
+  <div class="modal-card calc-card glass">
+    <div class="modal-head">
+      <h3>🧮 ماشین‌حساب</h3>
+      <button class="modal-close" data-close="calcOverlay" aria-label="بستن">✕</button>
+    </div>
+    <div class="calc-display" id="calcDisplay">0</div>
+    <div class="calc-history" id="calcHistory"></div>
+    <div class="calc-grid" id="calcGrid">
+      <button class="calc-btn-op" data-op="C">C</button>
+      <button class="calc-btn-op" data-op="±">±</button>
+      <button class="calc-btn-op" data-op="%">%</button>
+      <button class="calc-btn-op op" data-op="/">÷</button>
+      <button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button>
+      <button class="calc-btn-op op" data-op="*">×</button>
+      <button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button>
+      <button class="calc-btn-op op" data-op="-">−</button>
+      <button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button>
+      <button class="calc-btn-op op" data-op="+">+</button>
+      <button data-num="0" class="calc-span2">0</button>
+      <button data-num=".">.</button>
+      <button class="calc-btn-op eq" data-op="=">=</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ مودال کلاس آنلاین ============ -->
+<div class="modal-overlay" id="classOverlay" role="dialog" aria-modal="true">
+  <div class="modal-card class-card glass">
+    <div class="modal-head">
+      <h3>🎥 ورود به کلاس آنلاین</h3>
+      <button class="modal-close" data-close="classOverlay" aria-label="بستن">✕</button>
+    </div>
+    <p class="class-desc">برای ورود به کلاس، کد کلاس و نام خودت رو وارد کن.</p>
+    <form id="classForm" class="class-form">
+      <label><span>کد کلاس</span><input type="text" id="classCode" required placeholder="مثلا: 482913"></label>
+      <label><span>نام نمایشی</span><input type="text" id="className" required placeholder="نام تو در کلاس"></label>
+      <label class="class-check"><input type="checkbox" id="classMic"> میکروفن روشن</label>
+      <button type="submit" class="btn btn-solid">ورود به کلاس</button>
+    </form>
+  </div>
+</div>
+<!-- ============ مودال داستان ============ -->
+<div class="story-modal" id="storyModal" role="dialog" aria-modal="true">
+  <div class="story-modal-inner">
+    <div class="story-progress"><div class="story-progress-fill" id="storyProgressFill"></div></div>
+    <button class="story-close" id="storyClose" aria-label="بستن" type="button">✕</button>
+    <div class="story-content" id="storyContent">
+      <div class="story-avatar-big" id="storyAvatarBig">م</div>
+      <h3 id="storyName">—</h3>
+      <div class="story-rank" id="storyRank">—</div>
+      <p id="storyText">—</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Owner: افزودن رشته ============ -->
+<div class="modal-overlay" id="addMajorOverlay" role="dialog" aria-modal="true">
+  <div class="modal-card glass">
+    <div class="modal-head">
+      <h3>➕ افزودن رشته (پنل مالک)</h3>
+      <button class="modal-close" data-close="addMajorOverlay" aria-label="بستن">✕</button>
+    </div>
+    <form id="addMajorForm" class="class-form">
+      <label><span>عنوان رشته</span><input type="text" id="newMajorTitle" required placeholder="مثلا: علوم ورزشی"></label>
+      <label><span>کلید یکتا (انگلیسی)</span><input type="text" id="newMajorKey" required placeholder="varzesh"></label>
+      <label><span>ترتیب نمایش</span><input type="number" id="newMajorOrder" value="10"></label>
+      <button type="submit" class="btn btn-solid">ذخیره</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ کوکی ============ -->
+<div class="cookie-banner glass" id="cookieBanner" role="region">
+  <div class="cookie-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>
+  <div class="cookie-text">ما از کوکی‌ها برای بهبود تجربه استفاده می‌کنیم.</div>
+  <div class="cookie-actions">
+    <button class="cookie-btn reject" id="cookieReject" type="button">رد</button>
+    <button class="cookie-btn accept" id="cookieAccept" type="button">قبول</button>
+  </div>
+</div>
+
+<!-- ============ فوتر ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <svg viewBox="0 0 48 48" fill="none" style="width:34px;height:34px;"><path d="M24 4 L44 40 H4 Z" fill="currentColor" opacity=".85"/><path d="M24 4 L34 22 L14 22 Z" fill="currentColor"/></svg>
+          <span>پیرامید</span>
+        </a>
+        <p>پیرامید مجموعه‌ای کامل از ابزارهای تخمین کنکور است.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 3.5L2.7 10.9c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.9 5.7c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.2-2.1 4.6 3.4c.8.5 1.4.2 1.6-.8l3-14c.3-1.2-.4-1.7-1.2-1.4z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>ابزارها</h4>
+        <ul>
+          <li><a href="estimate.html">تخمین کنکور</a></li>
+          <li><a href="estimate.html?m=savabegh">تخمین تراز سوابق</a></li>
+          <li><a href="account.html">پنل کاربری</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>پشتیبانی</h4>
+        <ul>
+          <li><a href="#announcements">اعلانات</a></li>
+          <li><a href="#">راهنما</a></li>
+          <li><a href="#">قوانین</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ۱۴۰۴ پیرامید — تمامی حقوق محفوظ است.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

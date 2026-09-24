@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پشتیبان‌گیری | پیرامید</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="blob blob-1" aria-hidden="true"></div>
+<div class="blob blob-2" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L44 40 H4 Z" fill="currentColor" opacity=".85"/><path d="M24 4 L34 22 L14 22 Z" fill="currentColor"/></svg>
+    </a>
+    <h2 style="flex:1;text-align:center;font-size:1.05em;">💾 پشتیبان‌گیری</h2>
+    <div class="header-actions">
+      <a href="dashboard.html" class="btn btn-solid" style="padding:9px 20px;font-size:.85em;">🎯 داشبورد</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="bk-wrap">
+
+    <!-- ============ اطلاعات ============ -->
+    <section class="bk-info glass reveal">
+      <h2>🛡 امنیت داده‌هات</h2>
+      <p>همه‌ی اطلاعات پیرامید روی همین مرورگر ذخیره می‌شه. با پشتیبان‌گیری می‌تونی همه‌چیز رو به یه فایل منتقل کنی.</p>
+
+      <div class="bk-stats" id="bkStats"></div>
+    </section>
+
+    <!-- ============ پشتیبان‌گیری ============ -->
+    <section class="bk-card glass reveal delay-1">
+      <div class="bk-card-icon bk-icon-save">📤</div>
+      <div class="bk-card-body">
+        <h3>پشتیبان‌گیری (Export)</h3>
+        <p>کل اطلاعاتت (تخمین‌ها، فلش‌کارت‌ها، مطالعه، خاطرات، XP، همه‌چیز) در یه فایل امن JSON دانلود می‌شه.</p>
+        <div class="bk-actions">
+          <button class="btn btn-solid" id="bkExportBtn" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            دانلود فایل پشتیبان
+          </button>
+          <button class="btn" id="bkExportCSV" type="button" style="background:var(--soft);color:var(--text);border:1px solid var(--border);">
+            📊 خروجی CSV مطالعه
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ بازیابی ============ -->
+    <section class="bk-card glass reveal delay-1">
+      <div class="bk-card-icon bk-icon-restore">📥</div>
+      <div class="bk-card-body">
+        <h3>بازیابی (Import)</h3>
+        <p>فایل پشتیبان قبلی رو انتخاب کن تا همه‌چیز برگرده. <strong>هشدار:</strong> اطلاعات فعلی جایگزین می‌شن!</p>
+
+        <input type="file" id="bkFileInput" accept=".json,application/json" style="display:none;">
+
+        <div class="bk-drop" id="bkDrop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <path d="M17 8l-5-5-5 5"/>
+            <path d="M12 3v12"/>
+          </svg>
+          <b>فایل رو این‌جا بکش</b>
+          <span>یا</span>
+          <button class="btn btn-solid" id="bkChooseBtn" type="button" style="padding:9px 22px;font-size:.82em;">انتخاب فایل</button>
+        </div>
+
+        <div class="bk-preview" id="bkPreview" style="display:none;">
+          <h4>📋 پیش‌نمایش فایل</h4>
+          <div class="bk-preview-info" id="bkPreviewInfo"></div>
+          <div class="bk-preview-actions">
+            <button class="btn btn-solid" id="bkConfirmRestore" type="button">✅ بله، بازیابی کن</button>
+            <button class="btn" id="bkCancelRestore" type="button" style="background:var(--soft);color:var(--text);border:1px solid var(--border);">لغو</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ مدیریت ============ -->
+    <section class="bk-card glass reveal delay-2">
+      <div class="bk-card-icon bk-icon-danger">⚠️</div>
+      <div class="bk-card-body">
+        <h3>منطقه‌ی خطر</h3>
+        <p>این عملیات قابل بازگشت نیست. حتماً قبلش پشتیبان بگیر.</p>
+        <div class="bk-actions">
+          <button class="btn" id="bkClearStats" type="button" style="background:rgba(239,68,68,.12);color:#df6680;border:1px solid rgba(239,68,68,.3);">
+            🧹 پاک کردن آمار (بقیه می‌مونه)
+          </button>
+          <button class="btn" id="bkClearAll" type="button" style="background:#df6680;color:#fff;border:none;">
+            🗑 پاک کردن همه چیز
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ============ مودال تأیید ============ -->
+<div class="modal-overlay" id="bkConfirmModal" role="dialog" aria-modal="true">
+  <div class="modal-card glass" style="max-width:420px;">
+    <div class="modal-head">
+      <h3 id="bkModalTitle">تأیید</h3>
+    </div>
+    <div class="class-form" style="padding:20px 24px 26px;text-align:center;">
+      <p id="bkModalText" style="line-height:1.9;margin-bottom:20px;">مطمئنی؟</p>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-solid" id="bkModalYes" type="button" style="flex:1;background:#df6680;">بله</button>
+        <button class="btn" id="bkModalNo" type="button" style="flex:1;background:var(--soft);color:var(--text);border:1px solid var(--border);">انصراف</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="pwa.js"></script>
+<script src="backup.js"></script>
+</body>
+</html>

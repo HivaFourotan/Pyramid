@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اتاق تمرکز | پیرامید</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="fr-body">
+
+<canvas id="frCanvas" class="fr-canvas" aria-hidden="true"></canvas>
+
+<!-- ============ هدر شناور ============ -->
+<header class="fr-header">
+  <a href="dashboard.html" class="fr-back" aria-label="برگشت به داشبورد">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <div class="fr-title">🌧 اتاق تمرکز</div>
+  <button class="fr-fullscreen" id="frFullscreen" aria-label="تمام صفحه">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</header>
+
+<!-- ============ شمارش اصلی ============ -->
+<main class="fr-main">
+
+  <!-- دایره‌ی مرکزی -->
+  <div class="fr-center">
+    <div class="fr-ring">
+      <svg viewBox="0 0 320 320" class="fr-ring-svg">
+        <circle class="fr-ring-bg" cx="160" cy="160" r="140"/>
+        <circle class="fr-ring-fg" id="frRingFg" cx="160" cy="160" r="140"/>
+      </svg>
+      <div class="fr-ring-inner">
+        <div class="fr-time" id="frTime">۲۵:۰۰</div>
+        <div class="fr-state" id="frState">آماده</div>
+      </div>
+    </div>
+
+    <div class="fr-controls">
+      <button class="fr-btn fr-btn-main" id="frStartBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <span>شروع</span>
+      </button>
+      <button class="fr-btn fr-btn-icon" id="frResetBtn" type="button" aria-label="ریست">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>
+      </button>
+    </div>
+
+    <div class="fr-presets">
+      <button class="fr-preset" data-min="15" type="button">۱۵ دقیقه</button>
+      <button class="fr-preset active" data-min="25" type="button">۲۵ دقیقه</button>
+      <button class="fr-preset" data-min="45" type="button">۴۵ دقیقه</button>
+      <button class="fr-preset" data-min="60" type="button">۶۰ دقیقه</button>
+    </div>
+  </div>
+
+  <!-- پنل تنظیمات -->
+  <aside class="fr-panel" id="frPanel">
+    <div class="fr-panel-handle" id="frPanelHandle">
+      <span></span>
+    </div>
+
+    <section class="fr-section">
+      <h4>🎨 منظره</h4>
+      <div class="fr-scenes" id="frScenes">
+        <button class="fr-scene active" data-scene="rain" type="button">
+          <span class="fr-scene-icon">🌧</span>
+          <span>باران</span>
+        </button>
+        <button class="fr-scene" data-scene="snow" type="button">
+          <span class="fr-scene-icon">❄️</span>
+          <span>برف</span>
+        </button>
+        <button class="fr-scene" data-scene="stars" type="button">
+          <span class="fr-scene-icon">✨</span>
+          <span>ستاره</span>
+        </button>
+        <button class="fr-scene" data-scene="aurora" type="button">
+          <span class="fr-scene-icon">🌌</span>
+          <span>شفق</span>
+        </button>
+        <button class="fr-scene" data-scene="fire" type="button">
+          <span class="fr-scene-icon">🔥</span>
+          <span>آتش</span>
+        </button>
+        <button class="fr-scene" data-scene="ocean" type="button">
+          <span class="fr-scene-icon">🌊</span>
+          <span>ساحل</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="fr-section">
+      <h4>🎵 صدای محیطی</h4>
+      <div class="fr-sounds" id="frSounds">
+        <div class="fr-sound" data-sound="rain">
+          <div class="fr-sound-head">
+            <span>🌧 صدای باران</span>
+            <button class="fr-sound-toggle" type="button"></button>
+          </div>
+          <input type="range" class="fr-sound-vol" min="0" max="100" value="60">
+        </div>
+        <div class="fr-sound" data-sound="cafe">
+          <div class="fr-sound-head">
+            <span>☕ همهمه‌ی کافه</span>
+            <button class="fr-sound-toggle" type="button"></button>
+          </div>
+          <input type="range" class="fr-sound-vol" min="0" max="100" value="50">
+        </div>
+        <div class="fr-sound" data-sound="waves">
+          <div class="fr-sound-head">
+            <span>🌊 موج دریا</span>
+            <button class="fr-sound-toggle" type="button"></button>
+          </div>
+          <input type="range" class="fr-sound-vol" min="0" max="100" value="60">
+        </div>
+        <div class="fr-sound" data-sound="forest">
+          <div class="fr-sound-head">
+            <span>🌲 جنگل</span>
+            <button class="fr-sound-toggle" type="button"></button>
+          </div>
+          <input type="range" class="fr-sound-vol" min="0" max="100" value="50">
+        </div>
+        <div class="fr-sound" data-sound="fire">
+          <div class="fr-sound-head">
+            <span>🔥 صدای آتش</span>
+            <button class="fr-sound-toggle" type="button"></button>
+          </div>
+          <input type="range" class="fr-sound-vol" min="0" max="100" value="50">
+        </div>
+        <div class="fr-sound" data-sound="white">
+          <div class="fr-sound-head">
+            <span>📻 نویز سفید</span>
+            <button class="fr-sound-toggle" type="button"></button>
+          </div>
+          <input type="range" class="fr-sound-vol" min="0" max="100" value="40">
+        </div>
+      </div>
+    </section>
+
+    <section class="fr-section">
+      <h4>🫁 تمرین تنفس</h4>
+      <button class="fr-breathe-btn" id="frBreatheBtn" type="button">
+        <span id="frBreatheText">شروع تمرین ۴-۷-۸</span>
+      </button>
+      <p class="fr-hint">۴ ثانیه دم، ۷ ثانیه نگه‌دار، ۸ ثانیه بازدم</p>
+    </section>
+  </aside>
+
+  <!-- مودال تنفس -->
+  <div class="fr-breathe-overlay" id="frBreatheOverlay">
+    <div class="fr-breathe-circle" id="frBreatheCircle">
+      <div class="fr-breathe-inner">
+        <div class="fr-breathe-phase" id="frBreathePhase">آماده</div>
+        <div class="fr-breathe-count" id="frBreatheCount">—</div>
+      </div>
+    </div>
+    <button class="fr-breathe-close" id="frBreatheClose" type="button">✕ پایان</button>
+  </div>
+
+  <!-- نوار پایین -->
+  <div class="fr-bottom-bar">
+    <div class="fr-session-info">
+      <span>جلسه‌های امروز:</span>
+      <b id="frSessionsToday">۰</b>
+    </div>
+    <div class="fr-session-info">
+      <span>دقیقه‌ی امروز:</span>
+      <b id="frMinutesToday">۰</b>
+    </div>
+    <div class="fr-session-info">
+      <span>XP این جلسه:</span>
+      <b id="frSessionXP">۰</b>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="script.js"></script>
+<script src="focus-room.js"></script>
+</body>
+</html>

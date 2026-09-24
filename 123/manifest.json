@@ -1,0 +1,45 @@
+{
+  "name": "پیرامید — تخمین دقیق کنکور",
+  "short_name": "پیرامید",
+  "description": "تخمین تراز، رتبه، انتخاب رشته و ابزارهای مطالعه برای کنکوری‌ها",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "fa",
+  "dir": "rtl",
+  "theme_color": "#e85d9e",
+  "background_color": "#fffafd",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "داشبورد مطالعه",
+      "url": "./dashboard.html",
+      "description": "تایمر پومودورو و آمار"
+    },
+    {
+      "name": "تخمین کنکور",
+      "url": "./estimate.html",
+      "description": "تخمین تراز و رتبه"
+    },
+    {
+      "name": "فلش‌کارت",
+      "url": "./flashcards.html",
+      "description": "مرور با الگوریتم SM-2"
+    }
+  ]
+}
