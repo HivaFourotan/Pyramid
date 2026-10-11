@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin.html
-Disallow: /account.html
-Disallow: /backup.html
-
-Sitemap: /sitemap.xml
